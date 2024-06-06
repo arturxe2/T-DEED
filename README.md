@@ -13,4 +13,4 @@ This repository contains the PyTorch implementation of the paper:
 PyTorch Implementation of "T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos", 10th International Workshop on Computer Vision in Sports (CVsports) at CVPR 2024.
 
 
-T-DEED implementation will be released soon.
+T-DEED implementation will be released soon...
