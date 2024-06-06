@@ -4,6 +4,8 @@ This directory contains the splits and labels converted from FigureSkating: http
 
 To download the videos and generate the folder structure for frames, follow the instructions from E2E-Spot: https://github.com/jhong93/spot/tree/main/data/fs_comp
 
+Frames are extracted at a resolution of 398x224.
+
 ---
 
 ## License from E2E-Spot

@@ -4,6 +4,8 @@ This directory contains the splits and labels converted from FineDiving: https:/
 
 To download the trimmed video frames and generate the folder structure for frames, follow the instructions from E2E-Spot: https://github.com/jhong93/spot/tree/main/data/finediving
 
+Frames are extracted at a resolution of 224x224.
+
 ---
 
 ## License from FineDiving
