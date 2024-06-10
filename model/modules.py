@@ -3,11 +3,34 @@ File containing the different modules related to the model: T-DEED.
 """
 
 #Standard imports
+import abc
 import torch
 import torch.nn as nn
 import math
 
 #Local imports
+
+class ABCModel:
+
+    @abc.abstractmethod
+    def get_optimizer(self, opt_args):
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def epoch(self, loader, **kwargs):
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def predict(self, seq):
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def state_dict(self):
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def load(self, state_dict):
+        raise NotImplementedError()
 
 class BaseRGBModel(ABCModel):
 
@@ -260,7 +283,6 @@ class SGPMixer(nn.Module):
     def forward(self, x, z):
         # X shape: B, C, T
         B, C, T = x.shape
-
         z = self.ln1(z)
         x = self.ln2(x)
         x = self.upsample(x)
@@ -292,6 +314,8 @@ class SGPMixer(nn.Module):
         #out = z + out
         # FFN
         out = out + self.mlp(self.gn(out))
+
+        return out
 
 class LayerNorm(nn.Module):
     """

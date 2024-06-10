@@ -25,8 +25,6 @@ class TDEEDModel(BaseRGBModel):
     class Impl(nn.Module):
 
         def __init__(self, args = None):
-            #num_classes, feature_arch, temporal_arch, n_layers, clip_len,
-            #        modality, d=512, args=None):
             super().__init__()
             self._modality = args.modality
             assert self._modality == 'rgb', 'Only RGB supported for now'
@@ -36,7 +34,7 @@ class TDEEDModel(BaseRGBModel):
             assert self._temp_arch == 'ed_sgp_mixer', 'Only ed_sgp_mixer supported for now'
             self._radi_displacement = args.radi_displacement
             self._feature_arch = args.feature_arch
-            assert self._feature_arch.contains('rny'), 'Only rny supported for now'
+            assert 'rny' in self._feature_arch, 'Only rny supported for now'
 
             if self._feature_arch.startswith(('rny002', 'rny008')):
                 features = timm.create_model({
@@ -54,10 +52,10 @@ class TDEEDModel(BaseRGBModel):
 
             # Add Temporal Shift Modules
             self._require_clip_len = -1
-            if args._feature_arch.endswith('_gsm'):
+            if self._feature_arch.endswith('_gsm'):
                 make_temporal_shift(features, args.clip_len, mode='gsm')
                 self._require_clip_len = args.clip_len
-            elif args._feature_arch.endswith('_gsf'):
+            elif self._feature_arch.endswith('_gsf'):
                 make_temporal_shift(features, args.clip_len, mode='gsf')
                 self._require_clip_len = args.clip_len
 
@@ -66,11 +64,11 @@ class TDEEDModel(BaseRGBModel):
             feat_dim = self._d
 
             #Positional encoding
-            self.temp_enc = nn.Parameter(torch.normal(mean = 0, std = 1 / args.clip_len, size = (args.clip_len, self.d)))
+            self.temp_enc = nn.Parameter(torch.normal(mean = 0, std = 1 / args.clip_len, size = (args.clip_len, self._d)))
             
             if self._temp_arch == 'ed_sgp_mixer':
                 self._temp_fine = EDSGPMIXERLayers(feat_dim, args.clip_len, num_layers=args.n_layers, ks = args.sgp_ks, k = args.sgp_r, concat = True)
-                self._pred_fine = FCLayers(self._feat_dim, args.num_classes)
+                self._pred_fine = FCLayers(self._feat_dim, args.num_classes+1)
             else:
                 raise NotImplementedError(self._temp_arch)
             
@@ -106,11 +104,10 @@ class TDEEDModel(BaseRGBModel):
                 self.cropT = torch.nn.Identity()
                 self.cropI = torch.nn.Identity()
 
-        def forward(self, x, y = None, inference=False, compute_cosine=False, augment_inference=False):
+        def forward(self, x, y = None, inference=False, augment_inference=False):
 
             x = self.normalize(x) #Normalize to 0-1
             batch_size, true_clip_len, channels, height, width = x.shape
-
             if not inference:
                 x.view(-1, channels, height, width)
                 if self.croping != None:
@@ -131,12 +128,11 @@ class TDEEDModel(BaseRGBModel):
                 if augment_inference:
                     x = self.augmentI(x)
                 x = self.standarize(x)
-
             clip_len = true_clip_len
                         
             im_feat = self._features(
                 x.view(-1, channels, height, width)
-            ).reshape(batch_size, clip_len, self.d)
+            ).reshape(batch_size, clip_len, self._d)
 
             im_feat = im_feat + self.temp_enc.expand(batch_size, -1, -1)
 
@@ -187,7 +183,7 @@ class TDEEDModel(BaseRGBModel):
         self._args = args
 
         self._model.to(device)
-        self._num_classes = args.num_classes
+        self._num_classes = args.num_classes + 1
 
     def epoch(self, loader, optimizer=None, scaler=None, lr_scheduler=None,
             acc_grad_iter=1, fg_weight=5):
@@ -280,12 +276,9 @@ class TDEEDModel(BaseRGBModel):
                 if 'labelD' in batch.keys():
                     epoch_lossD += lossD.detach().item()
 
-        if 'labelD' in batch.keys():
-            print('LossD: ' + str(epoch_lossD / len(loader)))
-
         return epoch_loss / len(loader)     # Avg loss
 
-    def predict(self, seq, use_amp=True, compute_cosine=False, augment_test = False):
+    def predict(self, seq, use_amp=True, augment_inference = False):
         
         if not isinstance(seq, torch.Tensor):
             seq = torch.FloatTensor(seq)
@@ -298,7 +291,7 @@ class TDEEDModel(BaseRGBModel):
         self._model.eval()
         with torch.no_grad():
             with torch.cuda.amp.autocast() if use_amp else nullcontext():
-                pred, y = self._model(seq, inference=True, compute_cosine=compute_cosine, augment_test = augment_test)
+                pred, y = self._model(seq, inference=True, augment_inference = augment_inference)
             if isinstance(pred, dict):
                 predD = pred['displ_feat']
                 pred = pred['im_feat']
