@@ -8,9 +8,7 @@ This repository contains the PyTorch implementation of the paper:
 
 **T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos**<br>
 *Artur Xarles, Sergio Escalera, Thomas B. Moeslund, and Albert Clapés*<br>
-**CVsports'24 at CVPR 2024**<br>
-
-PyTorch Implementation of "T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos", 10th International Workshop on Computer Vision in Sports (CVsports) at CVPR 2024.
+**10th International Workshop on Computer Vision in Sports (CVsports) at CVPR 2024**<br>
 
 
 ## Overview
