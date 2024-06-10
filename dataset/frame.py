@@ -344,7 +344,7 @@ class ActionSpotVideoDataset(Dataset):
 
         if num_frames % self._stride != 0:
             num_labels += 1
-        labels = np.zeros(num_labels, np.int)
+        labels = np.zeros(num_labels, np.int64)
         for event in labels_file:
             frame = event['frame']
             if frame < num_frames:
@@ -404,7 +404,7 @@ class FrameReaderVideo:
         n_pad_start = 0
         n_pad_end = 0
 
-        if self.dataset == 'finediving':
+        if self._dataset == 'finediving':
             video_name = video_name.replace('__', '/')
             path = os.path.join(self._frame_dir, video_name)
             frame0 = sorted(os.listdir(path))[0]
@@ -417,10 +417,10 @@ class FrameReaderVideo:
                 n_pad_start += 1
                 continue
             
-            if self.dataset == 'finediving':
+            if self._dataset == 'finediving':
                 frame_path = os.path.join(path, str(frame0 + frame_num).zfill(ndigits) + '.jpg')
 
-            elif (self.dataset == 'fs_comp') or (self.dataset == 'fs_perf'):
+            elif (self._dataset == 'fs_comp') or (self._dataset == 'fs_perf'):
                 frame_path = os.path.join(
                     self._frame_dir, video_name, 'frame' + str(frame_num) + '.jpg'
                 )
