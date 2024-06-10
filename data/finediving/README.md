@@ -1,10 +1,25 @@
 # Setting up FineDiving
 
-This directory contains the splits and labels converted from FineDiving: https://finediving.ivg-research.xyz/.
+This directory contains the splits and labels converted from FineDiving, available at: https://finediving.ivg-research.xyz/.
 
-To download the trimmed video frames and generate the folder structure for frames, follow the instructions from E2E-Spot: https://github.com/jhong93/spot/tree/main/data/finediving
+To download the trimmed video frames and generate the folder structure for frames, follow the instructions provided in E2E-Spot: https://github.com/jhong93/spot/tree/main/data/finediving
 
-Frames are extracted at a resolution of 224x224.
+Frames are extracted at a resolution of 224x224, following this frame naming convention:
+
+```
+data-folder
+└───FineDivingFrames
+    └───01
+        └───1
+            |00007378.jpg
+            |00007379.jpg
+            |...
+            |00007462.jpg
+        └───2
+            |00008650.jpg
+            |00008651.jpg
+            |...
+```
 
 ---
 

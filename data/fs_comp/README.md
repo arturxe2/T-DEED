@@ -1,10 +1,24 @@
 # Setting up FS-Competition split
 
-This directory contains the splits and labels converted from FigureSkating: https://jhong93.github.io/projects/vpd.html.
+This directory contains the splits and labels converted from the FigureSkating dataset, available at: https://jhong93.github.io/projects/vpd.html.
 
-To download the videos and generate the folder structure for frames, follow the instructions from E2E-Spot: https://github.com/jhong93/spot/tree/main/data/fs_comp
+To download the videos and generate the folder structure for frames, follow the instructions provided in E2E-Spot: https://github.com/jhong93/spot/tree/main/data/fs_comp
 
-Frames are extracted at a resolution of 398x224.
+Frames are extracted at a resolution of 398x224, and frame naming convention is slightly modified as follows:
+
+```
+data-folder
+└───FigureSkatingFrames
+    └───men_olympic_short_program_2018_01_00019225_00023525
+        |frame0.jpg
+        |frame1.jpg
+        |...
+        |frame4299.jpg
+    └───men_olympic_short_program_2018_02_00028750_00033050
+        |frame0.jpg
+        |frame1.jpg
+        |...
+```
 
 ---
 
