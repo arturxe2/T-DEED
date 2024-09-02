@@ -15,6 +15,8 @@ This repository contains the PyTorch implementation of the paper:
 
 This repository contains the code for T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting. It builds upon the codebase from [E2E-Spot](https://github.com/jhong93/spot), and we extend our gratitude for their work.
 
+An extended evaluation of T-DEED, along with its implementation, can be found at [T-DEED_v2](https://github.com/arturxe2/T-DEED_v2).
+
 ## Environment
 
 You can install the required packages for the project using the following command, with `requirements.txt` specifying the versions of the various packages:
