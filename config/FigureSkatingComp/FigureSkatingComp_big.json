@@ -1,7 +1,7 @@
 {
-    "frame_dir": "/data-local/data1-ssd/axesparraguera/FigureSkatingFrames",
-    "save_dir": "/data-slow/guest/axesparraguera/TDEED/FigureSkatingComp",
-    "store_dir": "/data-local/data1-ssd/axesparraguera/Spot/FigureSkatingCompStore",
+    "frame_dir": "/path/to/frames",
+    "save_dir": "/path/to/save",
+    "store_dir": "/path/to/store",
     "store_mode": "store",
     "batch_size": 8,
     "clip_len": 100,
