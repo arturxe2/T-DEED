@@ -67,10 +67,11 @@ If you have any questions related to the code, feel free to contact arturxe@gmai
 
 If you find our work useful, please consider citing our paper.
 ```
-@article{xarles2024t,
+@inproceedings{xarles2024t,
   title={T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos},
   author={Xarles, Artur and Escalera, Sergio and Moeslund, Thomas B and Clap{\'e}s, Albert},
-  journal={arXiv preprint arXiv:2404.05392},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={3410--3419},
   year={2024}
 }
 ```
