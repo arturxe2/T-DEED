@@ -1,0 +1,33 @@
+{
+    "frame_dir": "/path/to/frames",
+    "save_dir": "/path/to/save",
+    "store_dir": "/path/to/store",
+    "store_mode": "load",
+    "batch_size": 2,
+    "clip_len": 100,
+    "crop_dim": -1,
+    "dataset": "soccernetball",
+    "radi_displacement": 4,
+    "epoch_num_frames": 500000,
+    "feature_arch": "rny008_gsf",
+    "learning_rate": 0.0008,
+    "mixup": true,
+    "modality": "rgb",
+    "num_classes": 12,
+    "num_epochs": 35,
+    "warm_up_epochs": 3,
+    "start_val_epoch": 20,
+    "temporal_arch": "ed_sgp_mixer",
+    "n_layers": 2,
+    "sgp_ks": 9,
+    "sgp_r": 4,
+    "only_test": true,
+    "criterion": "map",
+    "num_workers": 4,
+    "pretrain": {
+        "frame_dir": "/path/to/frames",
+        "store_dir": "/path/to/store2",
+        "dataset": "soccernet",
+        "num_classes": 17
+    }
+}

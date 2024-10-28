@@ -13,9 +13,10 @@ This repository contains the PyTorch implementation of the paper:
 
 ## Overview
 
-This repository contains the code for T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting (PES). It builds upon the codebase from [E2E-Spot](https://github.com/jhong93/spot), and we extend our gratitude for their work.
+This repository builds upon the original [T-DEED implementation](https://github.com/arturxe2/T-DEED) to evaluate the model across additional PES datasets and the broader Action Spotting task, including SoccerNet Action Spotting (SNAS) and SoccerNet Ball Action Spotting (SNBAS). Notably, this implementation was also used to achieve the 1st place in the 2024 SNBAS Challenge.
 
 It contains two distinct releases: the first corresponds to the initial release for the paper, and the second includes an extended evaluation on additional PES datasets along with adaptations for the broader Action Spotting task in SoccerNet.
+
 
 ## Environment
 
@@ -38,7 +39,7 @@ The `train_tdeed.py` file is designed to train and evaluate T-DEED based on the 
 python3 train_tdeed.py --model <model_name>
 ```
 
-Here, `<model_name>` follows the format `<dataset>_<name>`, where `<dataset>` is one of the three possible datasets (FigureSkatingComp, FigureSkatingPerf, or FineDiving), and `<name>` can be chosen freely but must match the name specified in the configuration file located in the config directory.
+Here, `<model_name>` follows the format `<dataset>_<name>`, where `<dataset>` is one of the possible datasets (FigureSkatingComp, FigureSkatingPerf, FineDiving, FineGym, Tennis, SoccerNet, or SoccerNetBall), and `<name>` can be chosen freely but must match the name specified in the configuration file located in the config directory.
 
 For example, to use the FineDiving dataset with the small model (200MF), you would run:
 
@@ -47,6 +48,9 @@ python3 train_tdeed.py --model FineDiving_small
 ```
 
 You can control whether to train the whole model or just evaluate it using the `only_test` parameter in the configuration file. For additional details on configuration options, refer to the README in the [config](/config/) directory.
+
+
+Before running the model, ensure that you have downloaded the dataset frames and updated the directory-related configuration parameters in the relevant [config](/config/) files, as well as in the [SN](/data/soccernet/labels_path.txt) and [SNB](/data/soccernetball/labels_path.txt) label files. Additionally, make sure to run the script once with the `mode` parameter set to `store` to generate and save the clip partitions. After this initial run, you can set the `mode` to `load` to reuse the saved partitions for subsequent executions.
 
 ## Trained models
 
@@ -63,12 +67,10 @@ If you have any questions related to the code, feel free to contact arturxe@gmai
 
 If you find our work useful, please consider citing our paper.
 ```
-@InProceedings{Xarles_2024_CVPR,
-    author    = {Xarles, Artur and Escalera, Sergio and Moeslund, Thomas B. and Clap\'es, Albert},
-    title     = {T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos},
-    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
-    month     = {June},
-    year      = {2024},
-    pages     = {3410-3419}
+@article{xarles2024t,
+  title={T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos},
+  author={Xarles, Artur and Escalera, Sergio and Moeslund, Thomas B and Clap{\'e}s, Albert},
+  journal={arXiv preprint arXiv:2404.05392},
+  year={2024}
 }
 ```

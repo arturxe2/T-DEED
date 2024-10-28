@@ -11,22 +11,26 @@ import torch
 import numpy as np
 import random
 from torch.utils.data import DataLoader
+import wandb
+import sys
 
 
 #Local imports
-from util.io import load_json, store_json
+from util.io import load_json, store_json, load_text
 from dataset.datasets import get_datasets
 from model.model import TDEEDModel
 from torch.optim.lr_scheduler import (
     ChainedScheduler, LinearLR, CosineAnnealingLR)
-from util.eval import evaluate
+from util.eval import evaluate, valMAP_SN, evaluate_SNB
+from SoccerNet.Evaluation.ActionSpotting import evaluate as evaluate_SN
 from dataset.frame import ActionSpotVideoDataset
 
 
 #Constants
-INFERENCE_BATCH_SIZE = 4
 EVAL_SPLITS = ['test']
 STRIDE = 1
+STRIDE_SN = 12
+STRIDE_SNB = 2
 
 
 def get_args():
@@ -41,7 +45,7 @@ def get_args():
 def update_args(args, config):
     #Update arguments with config file
     args.frame_dir = config['frame_dir']
-    args.save_dir = config['save_dir'] + '/' + args.model + '-' + str(args.seed)
+    args.save_dir = config['save_dir'] + '/' + args.model # + '-' + str(args.seed) -> in case multiple seeds
     args.store_dir = config['store_dir']
     args.store_mode = config['store_mode']
     args.batch_size = config['batch_size']
@@ -65,6 +69,10 @@ def update_args(args, config):
     args.only_test = config['only_test']
     args.criterion = config['criterion']
     args.num_workers = config['num_workers']
+    if 'pretrain' in config:
+        args.pretrain = config['pretrain']
+    else:
+        args.pretrain = None
 
     return args
 
@@ -91,23 +99,33 @@ def main(args):
     config = load_json(os.path.join('config', config_path))
     args = update_args(args, config)
 
+    #Variables for SN & SNB label paths if datastes
+    if (args.dataset == 'soccernet') | (args.dataset == 'soccernetball'):
+        global LABELS_SN_PATH
+        global LABELS_SNB_PATH
+        LABELS_SN_PATH = load_text(os.path.join('data', 'soccernet', 'labels_path.txt'))[0]
+        LABELS_SNB_PATH = load_text(os.path.join('data', 'soccernetball', 'labels_path.txt'))[0]
+
     assert args.batch_size % args.acc_grad_iter == 0
     if args.crop_dim <= 0:
         args.crop_dim = None
 
+    # initialize wandb
+    wandb.login()
+    wandb.init(config = args, dir = args.save_dir + '/wandb_logs', project = 'ExtendTDEED', name = args.model + '-' + str(args.seed))
+
     # Get datasets train, validation (and validation for map -> Video dataset)
-    classes, train_data, val_data, val_data_frames = get_datasets(args)
+    classes, pretrain_classes, train_data, val_data, val_data_frames = get_datasets(args)
         
     if args.store_mode == 'store':
-        print('Datasets have correctly been stored!')
+        print('Datasets have been stored correctly! Stop training here and rerun.')
+        sys.exit('Datasets have correctly been stored! Stop training here and rerun with load mode.')
     else:
         print('Datasets have been loaded from previous versions correctly!')
-
 
     def worker_init_fn(id):
         random.seed(id + epoch * 100)
     loader_batch_size = args.batch_size // args.acc_grad_iter
-
 
     # Dataloaders
     train_loader = DataLoader(
@@ -122,6 +140,13 @@ def main(args):
                 
     # Model
     model = TDEEDModel(args=args)
+
+    #If pretrain -> 2 prediction heads
+    if args.pretrain != None:
+        n_classes = [len(classes)+1, len(pretrain_classes)+1]
+        model._model.update_pred_head(n_classes)
+        model._num_classes = np.array(n_classes).sum() 
+
     optimizer, scaler = model.get_optimizer({'lr': args.learning_rate})
 
     if not args.only_test:
@@ -145,7 +170,10 @@ def main(args):
             time_train = time_train1 - time_train0
             
             time_val0 = time.time()
-            val_loss = model.epoch(val_loader, acc_grad_iter=args.acc_grad_iter)
+            if (args.dataset == 'soccernet') & (args.criterion == 'map') & (epoch >= args.start_val_epoch):
+                val_loss, map_labels, map_preds = model.epoch(val_loader, acc_grad_iter=args.acc_grad_iter, valMAP = True)
+            else:
+                val_loss = model.epoch(val_loader, acc_grad_iter=args.acc_grad_iter)
             time_val1 = time.time()
             time_val = time_val1 - time_val0
 
@@ -158,8 +186,12 @@ def main(args):
             elif args.criterion == 'map':
                 if epoch >= args.start_val_epoch:
                     time_map0 = time.time()
-                    val_mAP = evaluate(model, val_data_frames, 'VAL', classes,
-                                        printed=False, test=False)
+                    if args.dataset == 'soccernet':
+                        val_mAP = valMAP_SN(map_labels, map_preds, framerate = 6.25, metric = 'tight', version = 2)
+                        val_mAP = val_mAP['a_mAP']
+                    else:
+                        val_mAP = evaluate(model, val_data_frames, 'VAL', classes,
+                                            printed=False, test=False)
                     time_map1 = time.time()
                     time_map = time_map1 - time_map0
                     if val_mAP > best_criterion:
@@ -177,11 +209,19 @@ def main(args):
             print('Time val: ' + str(int(time_val // 60)) + 'min ' + str(np.round(time_val % 60, 2)) + 'sec')
             if (args.criterion == 'map') & (epoch >= args.start_val_epoch):
                 print('Time map: ' + str(int(time_map // 60)) + 'min ' + str(np.round(time_map % 60, 2)) + 'sec')
+            else:
+                time_map = 0
 
             losses.append({
                 'epoch': epoch, 'train': train_loss, 'val': val_loss,
                 'val_mAP': val_mAP
             })
+
+            # Log to wandb
+            if (args.criterion == 'map'):
+                wandb.log({'losses/train_loss': train_loss, 'losses/val_loss': val_loss, 'losses/val_mAP': val_mAP, 'times/time_train': time_train, 'times/time_val': time_val, 'times/time_map': time_map})
+            else:
+                wandb.log({'losses/train_loss': train_loss, 'losses/val_loss': val_loss, 'times/time_train': time_train, 'times/time_val': time_val})
 
             if args.save_dir is not None:
                 os.makedirs(args.save_dir, exist_ok=True)
@@ -191,12 +231,11 @@ def main(args):
                 if better:
                     torch.save(
                         model.state_dict(),
-                        os.path.join(os.getcwd(), 'checkpoints', args.model.split('_')[0], args.model, 'checkpoint_best.pt'))
+                        os.path.join(os.getcwd(), args.save_dir, 'checkpoint_best.pt'))
 
     print('START INFERENCE')
     model.load(torch.load(os.path.join(
-        os.getcwd(), 'checkpoints', args.model.split('_')[0], args.model, 'checkpoint_best.pt')
-    ))
+        os.getcwd(), 'checkpoints', args.model.split('_')[0], args.model, 'checkpoint_best.pt')))
 
     eval_splits = EVAL_SPLITS
 
@@ -205,11 +244,16 @@ def main(args):
             'data', args.dataset, '{}.json'.format(split))
 
         stride = STRIDE
+        if args.dataset == 'soccernet':
+            stride = STRIDE_SN
+        if args.dataset == 'soccernetball':
+            stride = STRIDE_SNB
 
         if os.path.exists(split_path):
             split_data = ActionSpotVideoDataset(
                 classes, split_path, args.frame_dir, args.modality,
-                args.clip_len, overlap_len = args.clip_len // 4 * 3, #75% overlapping
+                #args.clip_len, overlap_len = args.clip_len // 2,
+                args.clip_len, overlap_len = args.clip_len // 4 * 3 if args.dataset != 'soccernet' else args.clip_len // 2, # 3/4 overlap for video dataset, 1/2 overlap for soccernet
                 stride = stride, dataset = args.dataset)
 
             pred_file = None
@@ -217,8 +261,56 @@ def main(args):
                 pred_file = os.path.join(
                     args.save_dir, 'pred-{}'.format(split))
 
-            evaluate(model, split_data, split.upper(), classes, pred_file, printed = True, 
-                    test = True, augment = False)
+            mAPs, tolerances = evaluate(model, split_data, split.upper(), classes, pred_file, printed = True, 
+                        test = True, augment = (args.dataset != 'soccernet') & (args.dataset != 'soccernetball'))
+            
+            for i in range(len(mAPs)):
+                wandb.log({'test/mAP@' + str(tolerances[i]): mAPs[i]})
+                wandb.summary['test/mAP@' + str(tolerances[i])] = mAPs[i]
+
+            if args.dataset == 'soccernet':
+                results = evaluate_SN(LABELS_SN_PATH, '/'.join(pred_file.split('/')[:-1]) + '/preds', 
+                            split = split, prediction_file = "results_spotting.json", version = 2, 
+                            metric = "tight")
+                
+                results_loose = evaluate_SN(LABELS_SN_PATH, '/'.join(pred_file.split('/')[:-1]) + '/preds',
+                            split = split, prediction_file = "results_spotting.json", version = 2, 
+                            metric = "loose")
+
+                print('Tight aMAP: ', results['a_mAP'] * 100)
+                print('Tight aMAP per class: ', results['a_mAP_per_class'])
+
+                print('Loose aMAP: ', results_loose['a_mAP'] * 100)
+                print('Loose aMAP per class: ', results_loose['a_mAP_per_class'])
+
+                wandb.log({'test/mAP': results['a_mAP'] * 100})
+                wandb.summary['test/mAP'] = results['a_mAP'] * 100
+
+                for j in range(len(classes)):
+                    wandb.log({'test/classes/mAP@' + list(classes.keys())[j]: results['a_mAP_per_class'][j] * 100})
+
+                wandb.log({'test/mAP_loose': results_loose['a_mAP'] * 100})
+                wandb.summary['test/mAP_loose'] = results_loose['a_mAP'] * 100
+
+                for j in range(len(classes)):
+                    wandb.log({'test/classes/mAP_loose@' + list(classes.keys())[j]: results_loose['a_mAP_per_class'][j] * 100})
+
+            if args.dataset == 'soccernetball':
+                results = evaluate_SNB(LABELS_SNB_PATH, '/'.join(pred_file.split('/')[:-1]) + '/preds', split = split)
+                
+                print('aMAP@1: ', results['a_mAP'] * 100)
+                print('Average mAP per class: ')
+                print('-----------------------------------')
+                for i in range(len(results["a_mAP_per_class"])):
+                    print("    " + list(classes.keys())[i] + ": " + str(np.round(results["a_mAP_per_class"][i] * 100, 2)))
+
+                wandb.log({'test/mAP@1': results['a_mAP'] * 100})
+                wandb.summary['test/mAP@1'] = results['a_mAP'] * 100
+
+                for j in range(len(classes)):
+                    wandb.log({'test/classes/mAP@' + list(classes.keys())[j]: results['a_mAP_per_class'][j] * 100})
+
+
     
     print('CORRECTLY FINISHED TRAINING AND INFERENCE')
 

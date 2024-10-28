@@ -8,16 +8,25 @@ from tabulate import tabulate
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-from util.io import load_json
+from util.io import load_json, load_text
+
+FPS_SN = 25
 
 
 def parse_ground_truth(truth):
     label_dict = defaultdict(lambda: defaultdict(list))
     
     for x in truth:
-        events = x['events']
+        if 'events' not in x.keys():
+            LABELS_SN_PATH = load_text(os.path.join('data', 'soccernet', 'labels_path.txt'))[0]
+            events = load_json(os.path.join(LABELS_SN_PATH, "/".join(x['video'].split('/')[:-1]) + '/Labels-v2.json'))['annotations']
+        else:
+            events = x['events']
         for e in events:
-            frame = e['frame']
+            if 'frame' not in e.keys():
+                frame = int(int(e['position']) / 1000 * FPS_SN)
+            else:
+                frame = e['frame']
             label_dict[e['label']][x['video']].append(frame)
     
     return label_dict
@@ -87,7 +96,7 @@ def compute_average_precision(
 
 
 def compute_mAPs(
-        truth, pred, tolerances=[0, 1, 2, 4], plot_pr=False, printed = False
+        truth, pred, tolerances=[0, 1, 2, 4], plot_pr=False, printed = False, stride = 1
 ):
     #vid_names = [d['video'] for d in pred]
     #truth = [d for d in truth if d['video'] in vid_names]
@@ -95,10 +104,7 @@ def compute_mAPs(
     assert {v['video'] for v in truth} == {v['video'] for v in pred}, \
         'Video set mismatch!'
     
-
-
     truth_by_label = parse_ground_truth(truth)
-
 
     fig, axes = None, None
     if plot_pr:

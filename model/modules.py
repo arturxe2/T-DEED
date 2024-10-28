@@ -375,6 +375,17 @@ class FCLayers(nn.Module):
         return self._fc_out(self.dropout(x).reshape(batch_size * clip_len, -1)).view(
             batch_size, clip_len, -1)
     
+class FC2Layers(nn.Module):
+
+    def __init__(self, feat_dim, num_classes):
+        super().__init__()
+        self._fc1 = FCLayers(feat_dim, num_classes[0])
+        self._fc2 = FCLayers(feat_dim, num_classes[1])
+
+    def forward(self, x):
+        x = torch.cat([self._fc1(x), self._fc2(x)], dim = 2)
+        return x
+    
 
 def step(optimizer, scaler, loss, lr_scheduler=None, backward_only=False):
     if scaler is None:
@@ -401,3 +412,27 @@ def process_prediction(pred, predD):
 
             aux_pred[b, max(0, min(pred.shape[1]-1, t - displ))] = torch.maximum(aux_pred[b, max(0, min(pred.shape[1]-1, t - displ))], pred[b, t])
     return aux_pred
+
+def process_double_head(pred, predD, num_classes = 1):
+
+    pred1 = torch.softmax(pred[:, :, :num_classes], axis=2) #preds 1st head
+    aux_pred = torch.zeros_like(pred1)
+
+    for b in range(pred1.shape[0]):
+        for t in range(pred1.shape[1]):
+            displ = predD[b, t].round().int()
+            aux_pred[b, max(0, min(pred1.shape[1]-1, t - displ))] = torch.maximum(aux_pred[b, max(0, min(pred1.shape[1]-1, t - displ))], pred1[b, t]) #maximum aggregation
+
+    return aux_pred
+
+def process_labels(label, labelD, num_classes = 18):
+
+    label_aux = torch.zeros((label.shape[0], label.shape[1], num_classes))
+    label_aux[:, :, 0] = 1 #Background class
+    events = label.nonzero()
+    for i in range(events.shape[0]):
+        if ((events[i, 1] - int(labelD[events[i, 0], events[i, 1]])) < label.shape[1]) & ((events[i, 1] - int(labelD[events[i, 0], events[i, 1]])) >= 0):
+            label_aux[events[i, 0], events[i, 1] - int(labelD[events[i, 0], events[i, 1]]), label[events[i, 0], events[i, 1]]] = 1
+            label_aux[events[i, 0], events[i, 1] - int(labelD[events[i, 0], events[i, 1]]), 0] = 0
+    
+    return label_aux

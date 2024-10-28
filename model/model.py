@@ -11,14 +11,12 @@ from contextlib import nullcontext
 from tqdm import tqdm
 import random
 import torch.nn.functional as F
+import math
 
 
 #Local imports
-from model.modules import BaseRGBModel, EDSGPMIXERLayers, FCLayers, step, process_prediction
+from model.modules import BaseRGBModel, EDSGPMIXERLayers, FCLayers, FC2Layers, step, process_prediction, process_double_head, process_labels
 from model.shift import make_temporal_shift
-
-
-
 
 class TDEEDModel(BaseRGBModel):
 
@@ -29,12 +27,12 @@ class TDEEDModel(BaseRGBModel):
             self._modality = args.modality
             assert self._modality == 'rgb', 'Only RGB supported for now'
             in_channels = {'rgb': 3}[self._modality]
-            self._d = 512 # initialized to 512
             self._temp_arch = args.temporal_arch
-            assert self._temp_arch == 'ed_sgp_mixer', 'Only ed_sgp_mixer supported for now'
+            assert self._temp_arch in ['ed_sgp_mixer'], 'Only ed_sgp_mixer supported for now'
             self._radi_displacement = args.radi_displacement
             self._feature_arch = args.feature_arch
             assert 'rny' in self._feature_arch, 'Only rny supported for now'
+            self._double_head = False
 
             if self._feature_arch.startswith(('rny002', 'rny008')):
                 features = timm.create_model({
@@ -105,9 +103,10 @@ class TDEEDModel(BaseRGBModel):
                 self.cropI = torch.nn.Identity()
 
         def forward(self, x, y = None, inference=False, augment_inference=False):
-
+            
             x = self.normalize(x) #Normalize to 0-1
             batch_size, true_clip_len, channels, height, width = x.shape
+
             if not inference:
                 x.view(-1, channels, height, width)
                 if self.croping != None:
@@ -128,6 +127,7 @@ class TDEEDModel(BaseRGBModel):
                 if augment_inference:
                     x = self.augmentI(x)
                 x = self.standarize(x)
+
             clip_len = true_clip_len
                         
             im_feat = self._features(
@@ -165,6 +165,11 @@ class TDEEDModel(BaseRGBModel):
             for i in range(x.shape[0]):
                 x[i] = self.standarization(x[i])
             return x
+        
+        def update_pred_head(self, num_classes = [1, 1]):
+            self._pred_fine = FC2Layers(self._feat_dim, num_classes)
+            self._pred_fine = self._pred_fine.cuda()
+            self._double_head = True
 
         def print_stats(self):
             print('Model params:',
@@ -186,7 +191,7 @@ class TDEEDModel(BaseRGBModel):
         self._num_classes = args.num_classes + 1
 
     def epoch(self, loader, optimizer=None, scaler=None, lr_scheduler=None,
-            acc_grad_iter=1, fg_weight=5):
+            acc_grad_iter=1, fg_weight=5, valMAP=False):
 
         if optimizer is None:
             inference = True
@@ -196,18 +201,27 @@ class TDEEDModel(BaseRGBModel):
             optimizer.zero_grad()
             self._model.train()
 
+        if valMAP:
+            map_labels = []
+            map_preds = []
+
         ce_kwargs = {}
         if fg_weight != 1:
             ce_kwargs['weight'] = torch.FloatTensor(
                 [1] + [fg_weight] * (self._num_classes - 1)).to(self.device)
 
         epoch_loss = 0.
-        epoch_lossD = 0.
         with torch.no_grad() if optimizer is None else nullcontext():
             for batch_idx, batch in enumerate(tqdm(loader)):
                 frame = batch['frame'].to(self.device).float()
                 label = batch['label']
                 label = label.to(self.device)
+
+                #update labels for double head
+                if self._model._double_head:
+                    batch_dataset = batch['dataset']
+                    label = update_labels_2heads(label, batch_dataset, self._args.num_classes)
+
                 if 'labelD' in batch.keys():
                     labelD = batch['labelD'].to(self.device).float()
                 
@@ -239,6 +253,11 @@ class TDEEDModel(BaseRGBModel):
                     if 'labelD2' in batch.keys():
                         labelD = labelD_dist
 
+                if valMAP:
+                    labels_aux = process_labels(label, labelD if 'labelD' in batch.keys() else None,
+                                        num_classes = self._num_classes)
+                    map_labels.append(labels_aux.cpu())
+
                 # Depends on whether mixup is used
                 label = label.flatten() if len(label.shape) == 2 \
                     else label.view(-1, label.shape[-1])
@@ -250,18 +269,50 @@ class TDEEDModel(BaseRGBModel):
                         predD = pred['displ_feat']
                         pred = pred['im_feat']
 
+                    if valMAP:
+                        pred_aux = process_prediction(pred, predD)
+                        map_preds.append(pred_aux.cpu())
+
                     loss = 0.
 
-                    if len(pred.shape) == 3:
-                        pred = pred.unsqueeze(0)
+                    if self._model._double_head:
+                        b, t, c = pred.shape
+                        if len(label.shape) == 2:
+                            label = label.view(b, t, c)
+                        if len(label.shape) == 1:
+                            label = label.view(b, t)
 
-                    for i in range(pred.shape[0]):
-                        predictions = pred[i].reshape(-1, self._num_classes)
+                        for i in range(pred.shape[0]):
+                            if batch_dataset[i] == 1:
+                                if len(label.shape) == 3:
+                                    aux_label = label[i][:, :self._args.num_classes+1]
+                                elif len(label.shape) == 2:
+                                    aux_label = label[i]
+                                else:
+                                    raise NotImplementedError
+                                    
+                                loss += F.cross_entropy(pred[i][:, :self._args.num_classes+1], aux_label,
+                                                        weight = ce_kwargs['weight'][:self._args.num_classes+1]) / (pred.shape[0])
+                                    
+                            elif batch_dataset[i] == 2:
+                                if len(label.shape) == 3:
+                                    aux_label = label[i][:, self._args.num_classes+1:]
+                                elif len(label.shape) == 2:
+                                    aux_label = label[i] - (self._args.num_classes + 1)
+                                else:
+                                    raise NotImplementedError
+                                    
+                                loss += F.cross_entropy(pred[i][:, self._args.num_classes+1:], aux_label,
+                                                        weight = ce_kwargs['weight'][:self._args.pretrain['num_classes']+1]) / (pred.shape[0])
+
+                    else:
+                        predictions = pred.reshape(-1, self._num_classes)
 
                         loss += F.cross_entropy(
                             predictions, label,
-                            **ce_kwargs)                         
-                        
+                            **ce_kwargs)    
+                    
+                            
                     if 'labelD' in batch.keys():
                         lossD = F.mse_loss(predD, labelD, reduction = 'none')
                         lossD = (lossD).mean()
@@ -273,9 +324,11 @@ class TDEEDModel(BaseRGBModel):
                         backward_only=(batch_idx + 1) % acc_grad_iter != 0)
 
                 epoch_loss += loss.detach().item()
-                if 'labelD' in batch.keys():
-                    epoch_lossD += lossD.detach().item()
-
+                #if 'labelD' in batch.keys():
+                #    epoch_lossD += lossD.detach().item()
+        
+        if valMAP:
+            return epoch_loss / len(loader), torch.cat(map_labels, 0), torch.cat(map_preds, 0)
         return epoch_loss / len(loader)     # Avg loss
 
     def predict(self, seq, use_amp=True, augment_inference = False):
@@ -295,7 +348,14 @@ class TDEEDModel(BaseRGBModel):
             if isinstance(pred, dict):
                 predD = pred['displ_feat']
                 pred = pred['im_feat']
-                pred = process_prediction(pred, predD)
+                if isinstance(pred, list):
+                    pred = pred[0]
+                if isinstance(predD, list):
+                    predD = predD[0]
+                if self._model._double_head:
+                    pred = process_double_head(pred, predD, num_classes = self._args.num_classes+1)
+                else:
+                    pred = process_prediction(pred, predD)
                 pred_cls = torch.argmax(pred, axis=2)
                 return pred_cls.cpu().numpy(), pred.cpu().numpy()
             if isinstance(pred, tuple):
@@ -307,3 +367,10 @@ class TDEEDModel(BaseRGBModel):
 
             pred_cls = torch.argmax(pred, axis=2)
             return pred_cls.cpu().numpy(), pred.cpu().numpy()
+        
+def update_labels_2heads(labels, datasets, num_classes1 = 1):
+    for i in range(len(datasets)):
+        if datasets[i] == 2:
+            labels[i] = labels[i] + num_classes1 + 1
+
+    return labels

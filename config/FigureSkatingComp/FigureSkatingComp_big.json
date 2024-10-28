@@ -2,7 +2,7 @@
     "frame_dir": "/path/to/frames",
     "save_dir": "/path/to/save",
     "store_dir": "/path/to/store",
-    "store_mode": "store",
+    "store_mode": "load",
     "batch_size": 8,
     "clip_len": 100,
     "crop_dim": 224,
