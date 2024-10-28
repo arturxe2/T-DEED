@@ -1,5 +1,3 @@
-### An extended evaluation of T-DEED, along with its implementation, can be found at [T-DEED_v2](https://github.com/arturxe2/T-DEED_v2).
-
 # T-DEED
 ### T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting in Sports Videos (CVsports '24)
 <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
@@ -15,7 +13,9 @@ This repository contains the PyTorch implementation of the paper:
 
 ## Overview
 
-This repository contains the code for T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting. It builds upon the codebase from [E2E-Spot](https://github.com/jhong93/spot), and we extend our gratitude for their work.
+This repository contains the code for T-DEED: Temporal-Discriminability Enhancer Encoder-Decoder for Precise Event Spotting (PES). It builds upon the codebase from [E2E-Spot](https://github.com/jhong93/spot), and we extend our gratitude for their work.
+
+It contains two distinct releases: the first corresponds to the initial release for the paper, and the second includes an extended evaluation on additional PES datasets along with adaptations for the broader Action Spotting task in SoccerNet.
 
 ## Environment
 
