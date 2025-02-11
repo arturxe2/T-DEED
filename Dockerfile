@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Set the default command - separate script and arguments
-CMD ["python", "evaluate_tdeed_challenge.py", "--model", "FineDiving_small"] 
+CMD ["python", "train_tdeed.py", "--model", "SoccerNet_small"] 

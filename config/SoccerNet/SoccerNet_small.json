@@ -1,8 +1,8 @@
 {
-    "frame_dir": "/path/to/frames",
-    "save_dir": "/path/to/save",
-    "store_dir": "/path/to/store",
-    "store_mode": "load",
+    "frame_dir": "/soccernet/frames",
+    "save_dir": "/soccernet/save",
+    "store_dir": "/soccernet/store",
+    "store_mode": "store",
     "batch_size": 8,
     "clip_len": 100,
     "crop_dim": -1,
