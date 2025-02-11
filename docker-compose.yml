@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  tdeed-evaluator:
+    build: .
+    runtime: nvidia  # Enable NVIDIA runtime
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  # Make all GPUs available
+    volumes:
+      - .:/app  # Mount current directory to /app
+    deploy:
+      # resources:
+      #   reservations:
+      #     devices:
+      #       - driver: nvidia
+      #         count: all
+      #         capabilities: [gpu] 
