@@ -8,10 +8,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copy the application code
-COPY evaluate_tdeed_challenge.py .
-COPY train_tdeed.py .
-COPY extract_frames_sn.py .
+COPY . .
 
-# Set the default command
-CMD ["python", "evaluate_tdeed_challenge.py"] 
+# Set the default command - separate script and arguments
+CMD ["python", "evaluate_tdeed_challenge.py", "--model", "FineDiving_small"] 

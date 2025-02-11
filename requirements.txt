@@ -42,3 +42,5 @@ torchvision==0.18.1
 tqdm==4.66.4
 typing_extensions==4.12.2
 urllib3==2.2.1
+wandb==0.19.6
+SoccerNet==0.1.62
