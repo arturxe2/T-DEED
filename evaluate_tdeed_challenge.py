@@ -44,7 +44,7 @@ def main(args):
     config = load_json(os.path.join('config', config_path))
     args = update_args(args, config)
 
-    assert args.dataset in ['soccernetball'] # Only SoccerNet Ball is supported
+    # assert args.dataset in ['soccernetball'] # Only SoccerNet Ball is supported
 
     #Variables for SN & SNB label paths if datastes
     if (args.dataset == 'soccernet') | (args.dataset == 'soccernetball'):
