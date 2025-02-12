@@ -45,10 +45,11 @@ coverage.xml
 # PyBuilder
 target/
 
-# Pytorch specific
-*.pth
-*.pt
-*.ckpt
-
 # Wandb
 wandb/
+
+frames448/
+
+
+# mac os
+.DS_Store
