@@ -8,7 +8,16 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY . .
+
+COPY checkpoints checkpoints
+COPY soccernet soccernet
+COPY data data
+COPY dataset dataset
+COPY model model
+COPY util util
+COPY .env .env
+COPY evaluate_tdeed_challenge.py .
+COPY train_tdeed.py .
 
 # Set the default command - separate script and arguments
-CMD ["python", "train_tdeed.py", "--model", "SoccerNet_small"] 
+CMD ["python", "evaluate_tdeed_challenge.py", "--model", "SoccerNet_small"] 
