@@ -223,4 +223,6 @@ if __name__ == '__main__':
     args.out_dir = args.out_dir + str(TARGET_HEIGHT)
     games = getListGames(SPLIT)
 
+    games = ["england_epl/2014-2015/2015-05-17 - 18-00 Manchester United 1 - 1 Arsenal"]
+
     main(args, games = games)

@@ -53,3 +53,6 @@ frames448/
 
 # mac os
 .DS_Store
+
+# video files
+*.mkv
