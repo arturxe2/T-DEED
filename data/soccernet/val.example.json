@@ -1,0 +1,802 @@
+[
+    {
+        "video": "england_epl/2014-2015/2015-04-11 - 19-30 Burnley 0 - 1 Arsenal/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2014-2015/2015-04-11 - 19-30 Burnley 0 - 1 Arsenal/half2",
+        "num_frames": 73075
+    },
+    {
+        "video": "england_epl/2015-2016/2015-08-30 - 18-00 Swansea 2 - 1 Manchester United/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2015-08-30 - 18-00 Swansea 2 - 1 Manchester United/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2015-09-26 - 17-00 Leicester 2 - 5 Arsenal/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2015-09-26 - 17-00 Leicester 2 - 5 Arsenal/half2",
+        "num_frames": 73050
+    },
+    {
+        "video": "england_epl/2015-2016/2015-09-26 - 17-00 Manchester United 3 - 0 Sunderland/half1",
+        "num_frames": 73700
+    },
+    {
+        "video": "england_epl/2015-2016/2015-09-26 - 17-00 Manchester United 3 - 0 Sunderland/half2",
+        "num_frames": 68200
+    },
+    {
+        "video": "england_epl/2015-2016/2015-10-03 - 17-00 Manchester City 6 - 1 Newcastle Utd/half1",
+        "num_frames": 70275
+    },
+    {
+        "video": "england_epl/2015-2016/2015-10-03 - 17-00 Manchester City 6 - 1 Newcastle Utd/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2015-12-26 - 18-00 Chelsea 2 - 2 Watford/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2015-12-26 - 18-00 Chelsea 2 - 2 Watford/half2",
+        "num_frames": 72900
+    },
+    {
+        "video": "england_epl/2015-2016/2016-01-23 - 20-30 West Ham 2 - 2 Manchester City/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-01-23 - 20-30 West Ham 2 - 2 Manchester City/half2",
+        "num_frames": 73575
+    },
+    {
+        "video": "england_epl/2015-2016/2016-01-24 - 19-00 Arsenal 0 - 1 Chelsea/half1",
+        "num_frames": 67575
+    },
+    {
+        "video": "england_epl/2015-2016/2016-01-24 - 19-00 Arsenal 0 - 1 Chelsea/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-02-13 - 20-30 Chelsea 5 - 1 Newcastle Utd/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-02-13 - 20-30 Chelsea 5 - 1 Newcastle Utd/half2",
+        "num_frames": 67725
+    },
+    {
+        "video": "england_epl/2015-2016/2016-02-27 - 18-00 Southampton 1 - 2 Chelsea/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-02-27 - 18-00 Southampton 1 - 2 Chelsea/half2",
+        "num_frames": 72275
+    },
+    {
+        "video": "england_epl/2015-2016/2016-03-05 - 18-00 Manchester City 4 - 0 Aston Villa/half1",
+        "num_frames": 68600
+    },
+    {
+        "video": "england_epl/2015-2016/2016-03-05 - 18-00 Manchester City 4 - 0 Aston Villa/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-03-20 - 19-00 Manchester City 0 - 1 Manchester United/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-03-20 - 19-00 Manchester City 0 - 1 Manchester United/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-04-23 - 17-00 Bournemouth 1 - 4 Chelsea/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2015-2016/2016-04-23 - 17-00 Bournemouth 1 - 4 Chelsea/half2",
+        "num_frames": 69450
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-01 - 14-30 Swansea 1 - 2 Liverpool/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-01 - 14-30 Swansea 1 - 2 Liverpool/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-02 - 18-30 Burnley 0 - 1 Arsenal/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-02 - 18-30 Burnley 0 - 1 Arsenal/half2",
+        "num_frames": 72150
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-22 - 17-00 Arsenal 0 - 0 Middlesbrough/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-22 - 17-00 Arsenal 0 - 0 Middlesbrough/half2",
+        "num_frames": 71525
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-29 - 19-30 Crystal Palace 2 - 4 Liverpool/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2016-2017/2016-10-29 - 19-30 Crystal Palace 2 - 4 Liverpool/half2",
+        "num_frames": 71375
+    },
+    {
+        "video": "england_epl/2016-2017/2016-12-04 - 16-30 Bournemouth 4 - 3 Liverpool/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "england_epl/2016-2017/2016-12-04 - 16-30 Bournemouth 4 - 3 Liverpool/half2",
+        "num_frames": 72975
+    },
+    {
+        "video": "england_epl/2016-2017/2017-04-09 - 18-00 Everton 4 - 2 Leicester/half1",
+        "num_frames": 68250
+    },
+    {
+        "video": "england_epl/2016-2017/2017-04-09 - 18-00 Everton 4 - 2 Leicester/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-11-04 - 22-45 Real Madrid 1 - 0 Liverpool/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-11-04 - 22-45 Real Madrid 1 - 0 Liverpool/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-11-05 - 22-45 Ajax 0 - 2 Barcelona/half1",
+        "num_frames": 68850
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-11-05 - 22-45 Ajax 0 - 2 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-11-05 - 22-45 Manchester City 1 - 2 CSKA Moscow/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-11-05 - 22-45 Manchester City 1 - 2 CSKA Moscow/half2",
+        "num_frames": 67725
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-12-09 - 22-45 Galatasaray 1 - 4 Arsenal/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-12-09 - 22-45 Galatasaray 1 - 4 Arsenal/half2",
+        "num_frames": 71825
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-12-09 - 22-45 Real Madrid 4 - 0 Ludogorets/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2014-12-09 - 22-45 Real Madrid 4 - 0 Ludogorets/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2015-03-11 - 22-45 Bayern Munich 7 - 0 Shakhtar Donetsk/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2015-03-11 - 22-45 Bayern Munich 7 - 0 Shakhtar Donetsk/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2015-04-15 - 21-45 Paris SG 1 - 3 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2015-04-15 - 21-45 Paris SG 1 - 3 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2015-04-21 - 21-45 Barcelona 2 - 0 Paris SG/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2014-2015/2015-04-21 - 21-45 Barcelona 2 - 0 Paris SG/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-15 - 21-45 PSV 2 - 1 Manchester United/half1",
+        "num_frames": 71300
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-15 - 21-45 PSV 2 - 1 Manchester United/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-16 - 21-45 Chelsea 4 - 0 Maccabi Tel Aviv/half1",
+        "num_frames": 74025
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-16 - 21-45 Chelsea 4 - 0 Maccabi Tel Aviv/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-16 - 21-45 Dyn. Kiev 2 - 2 FC Porto/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-16 - 21-45 Dyn. Kiev 2 - 2 FC Porto/half2",
+        "num_frames": 70700
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-16 - 21-45 Olympiakos Piraeus 0 - 3 Bayern Munich/half1",
+        "num_frames": 68675
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-16 - 21-45 Olympiakos Piraeus 0 - 3 Bayern Munich/half2",
+        "num_frames": 70975
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-29 - 21-45 Barcelona 2 - 1 Bayer Leverkusen/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-29 - 21-45 Barcelona 2 - 1 Bayer Leverkusen/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-29 - 21-45 FC Porto 2 - 1 Chelsea/half1",
+        "num_frames": 70750
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-09-29 - 21-45 FC Porto 2 - 1 Chelsea/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-03 - 22-45 Benfica 2 - 1 Galatasaray/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-03 - 22-45 Benfica 2 - 1 Galatasaray/half2",
+        "num_frames": 73175
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-04 - 22-45 Barcelona 3 - 0 BATE/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-04 - 22-45 Barcelona 3 - 0 BATE/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-24 - 20-00 BATE 1 - 1 Bayer Leverkusen/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-24 - 20-00 BATE 1 - 1 Bayer Leverkusen/half2",
+        "num_frames": 71250
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-25 - 22-45 Juventus 1 - 0 Manchester City/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2015-2016/2015-11-25 - 22-45 Juventus 1 - 0 Manchester City/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2016-2017/2016-09-28 - 21-45 Napoli 4 - 2 Benfica/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2016-2017/2016-09-28 - 21-45 Napoli 4 - 2 Benfica/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2016-2017/2016-10-19 - 21-45 Paris SG 3 - 0 Basel/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "europe_uefa-champions-league/2016-2017/2016-10-19 - 21-45 Paris SG 3 - 0 Basel/half2",
+        "num_frames": 72350
+    },
+    {
+        "video": "france_ligue-1/2015-2016/2015-09-19 - 18-30 Reims 1 - 1 Paris SG/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2015-2016/2015-09-19 - 18-30 Reims 1 - 1 Paris SG/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-08-21 - 21-45 Paris SG 3 - 0 Metz/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-08-21 - 21-45 Paris SG 3 - 0 Metz/half2",
+        "num_frames": 73800
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-09-09 - 21-45 Paris SG 1 - 1 St Etienne/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-09-09 - 21-45 Paris SG 1 - 1 St Etienne/half2",
+        "num_frames": 71950
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-09-20 - 22-00 Paris SG 3 - 0 Dijon/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-09-20 - 22-00 Paris SG 3 - 0 Dijon/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-10-23 - 21-45 Paris SG 0 - 0 Marseille/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-10-23 - 21-45 Paris SG 0 - 0 Marseille/half2",
+        "num_frames": 69250
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-12-03 - 19-00 Montpellier 3 - 0 Paris SG/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2016-12-03 - 19-00 Montpellier 3 - 0 Paris SG/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2017-03-04 - 19-00 Paris SG 1 - 0 Nancy/half1",
+        "num_frames": 71750
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2017-03-04 - 19-00 Paris SG 1 - 0 Nancy/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2017-04-09 - 22-00 Paris SG 4 - 0 Guingamp/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2017-04-09 - 22-00 Paris SG 4 - 0 Guingamp/half2",
+        "num_frames": 71475
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2017-05-14 - 22-00 St Etienne 0 - 5 Paris SG/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "france_ligue-1/2016-2017/2017-05-14 - 22-00 St Etienne 0 - 5 Paris SG/half2",
+        "num_frames": 68775
+    },
+    {
+        "video": "germany_bundesliga/2014-2015/2015-04-25 - 19-30 Bayern Munich 1 - 0 Hertha Berlin/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2014-2015/2015-04-25 - 19-30 Bayern Munich 1 - 0 Hertha Berlin/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2014-2015/2015-05-02 - 16-30 Hoffenheim 1 - 1 Dortmund/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2014-2015/2015-05-02 - 16-30 Hoffenheim 1 - 1 Dortmund/half2",
+        "num_frames": 69650
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2015-09-20 - 18-30 Dortmund 3 - 0 Bayer Leverkusen/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2015-09-20 - 18-30 Dortmund 3 - 0 Bayer Leverkusen/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2015-10-04 - 18-30 Bayern Munich 5 - 1 Dortmund/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2015-10-04 - 18-30 Bayern Munich 5 - 1 Dortmund/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2015-11-07 - 17-30 Bayern Munich 4 - 0 VfB Stuttgart/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2015-11-07 - 17-30 Bayern Munich 4 - 0 VfB Stuttgart/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2016-04-23 - 16-30 Hertha Berlin 0 - 2 Bayern Munich/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2015-2016/2016-04-23 - 16-30 Hertha Berlin 0 - 2 Bayern Munich/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2016-2017/2016-12-03 - 17-30 Dortmund 4 - 1 B. Monchengladbach/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2016-2017/2016-12-03 - 17-30 Dortmund 4 - 1 B. Monchengladbach/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2016-2017/2017-02-25 - 17-30 SC Freiburg 0 - 3 Dortmund/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "germany_bundesliga/2016-2017/2017-02-25 - 17-30 SC Freiburg 0 - 3 Dortmund/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2014-2015/2015-04-25 - 19-00 Udinese 2 - 1 AC Milan/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2014-2015/2015-04-25 - 19-00 Udinese 2 - 1 AC Milan/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2014-2015/2015-05-10 - 21-45 Lazio 1 - 2 Inter/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2014-2015/2015-05-10 - 21-45 Lazio 1 - 2 Inter/half2",
+        "num_frames": 71750
+    },
+    {
+        "video": "italy_serie-a/2014-2015/2015-05-17 - 13-30 Sassuolo 3 - 2 AC Milan/half1",
+        "num_frames": 70175
+    },
+    {
+        "video": "italy_serie-a/2014-2015/2015-05-17 - 13-30 Sassuolo 3 - 2 AC Milan/half2",
+        "num_frames": 74800
+    },
+    {
+        "video": "italy_serie-a/2015-2016/2015-09-26 - 21-45 Napoli 2 - 1 Juventus/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2015-2016/2015-09-26 - 21-45 Napoli 2 - 1 Juventus/half2",
+        "num_frames": 72325
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-08-20 - 19-00 AS Roma 4 - 0 Udinese/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-08-20 - 19-00 AS Roma 4 - 0 Udinese/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-09-18 - 21-45 Fiorentina 1 - 0 AS Roma/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-09-18 - 21-45 Fiorentina 1 - 0 AS Roma/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-09-21 - 21-45 Genoa 0 - 0 Napoli/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-09-21 - 21-45 Genoa 0 - 0 Napoli/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-10-02 - 19-00 AC Milan 4 - 3 Sassuolo/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-10-02 - 19-00 AC Milan 4 - 3 Sassuolo/half2",
+        "num_frames": 72025
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-10-29 - 21-45 Juventus 2 - 1 Napoli/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-10-29 - 21-45 Juventus 2 - 1 Napoli/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-11-05 - 22-45 Napoli 1 - 1 Lazio/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-11-05 - 22-45 Napoli 1 - 1 Lazio/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-12-12 - 23-00 AS Roma 1 - 0 AC Milan/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2016-12-12 - 23-00 AS Roma 1 - 0 AC Milan/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-01-22 - 22-45 AS Roma 1 - 0 Cagliari/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-01-22 - 22-45 AS Roma 1 - 0 Cagliari/half2",
+        "num_frames": 73075
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-02-19 - 17-00 Chievo 1 - 3 Napoli/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-02-19 - 17-00 Chievo 1 - 3 Napoli/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-03-12 - 22-45 Palermo 0 - 3 AS Roma/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-03-12 - 22-45 Palermo 0 - 3 AS Roma/half2",
+        "num_frames": 69275
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-04-02 - 21-45 Napoli 1 - 1 Juventus/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-04-02 - 21-45 Napoli 1 - 1 Juventus/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-04-15 - 21-45 Napoli 3 - 0 Udinese/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-04-15 - 21-45 Napoli 3 - 0 Udinese/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-04-30 - 13-30 AS Roma 1 - 3 Lazio/half1",
+        "num_frames": 68850
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-04-30 - 13-30 AS Roma 1 - 3 Lazio/half2",
+        "num_frames": 72850
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-05-06 - 19-00 Napoli 3 - 1 Cagliari/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "italy_serie-a/2016-2017/2017-05-06 - 19-00 Napoli 3 - 1 Cagliari/half2",
+        "num_frames": 71125
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-04-11 - 17-00 Real Madrid 3 - 0 Eibar/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-04-11 - 17-00 Real Madrid 3 - 0 Eibar/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-04-11 - 21-00 Sevilla 2 - 2 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-04-11 - 21-00 Sevilla 2 - 2 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-04-28 - 21-00 Barcelona 6 - 0 Getafe/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-04-28 - 21-00 Barcelona 6 - 0 Getafe/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-05-02 - 19-00 Atl. Madrid 0 - 0 Ath Bilbao/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-05-02 - 19-00 Atl. Madrid 0 - 0 Ath Bilbao/half2",
+        "num_frames": 72125
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-05-02 - 21-00 Sevilla 2 - 3 Real Madrid/half1",
+        "num_frames": 70825
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-05-02 - 21-00 Sevilla 2 - 3 Real Madrid/half2",
+        "num_frames": 72275
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-05-23 - 21-30 Real Madrid 7 - 3 Getafe/half1",
+        "num_frames": 68875
+    },
+    {
+        "video": "spain_laliga/2014-2015/2015-05-23 - 21-30 Real Madrid 7 - 3 Getafe/half2",
+        "num_frames": 68425
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-09-12 - 21-30 Atl. Madrid 1 - 2 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-09-12 - 21-30 Atl. Madrid 1 - 2 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-09-26 - 17-00 Barcelona 2 - 1 Las Palmas/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-09-26 - 17-00 Barcelona 2 - 1 Las Palmas/half2",
+        "num_frames": 72000
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-10-24 - 17-00 Celta Vigo 1 - 3 Real Madrid/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-10-24 - 17-00 Celta Vigo 1 - 3 Real Madrid/half2",
+        "num_frames": 76475
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-12-13 - 22-30 Villarreal 1 - 0 Real Madrid/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-12-13 - 22-30 Villarreal 1 - 0 Real Madrid/half2",
+        "num_frames": 71750
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-12-20 - 18-00 Real Madrid 1 - 0 Rayo Vallecano/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2015-12-20 - 18-00 Real Madrid 1 - 0 Rayo Vallecano/half2",
+        "num_frames": 67900
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-01-03 - 22-30 Valencia 2 - 2 Real Madrid/half1",
+        "num_frames": 69250
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-01-03 - 22-30 Valencia 2 - 2 Real Madrid/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-01-09 - 22-30 Real Madrid 5 - 0 Dep. La Coruna/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-01-09 - 22-30 Real Madrid 5 - 0 Dep. La Coruna/half2",
+        "num_frames": 69350
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-02-13 - 18-00 Real Madrid 4 - 2 Ath Bilbao/half1",
+        "num_frames": 68950
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-02-13 - 18-00 Real Madrid 4 - 2 Ath Bilbao/half2",
+        "num_frames": 68775
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-03-20 - 22-30 Real Madrid 4 - 0 Sevilla/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2015-2016/2016-03-20 - 22-30 Real Madrid 4 - 0 Sevilla/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-08-21 - 21-15 Real Sociedad 0 - 3 Real Madrid/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-08-21 - 21-15 Real Sociedad 0 - 3 Real Madrid/half2",
+        "num_frames": 74700
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-09-17 - 14-00 Leganes 1 - 5 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-09-17 - 14-00 Leganes 1 - 5 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-10-02 - 21-45 Celta Vigo 4 - 3 Barcelona/half1",
+        "num_frames": 68725
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-10-02 - 21-45 Celta Vigo 4 - 3 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-10-15 - 17-15 Barcelona 4 - 0 Dep. La Coruna/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2016-10-15 - 17-15 Barcelona 4 - 0 Dep. La Coruna/half2",
+        "num_frames": 67725
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-01-07 - 15-00 Real Madrid 5 - 0 Granada CF/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-01-07 - 15-00 Real Madrid 5 - 0 Granada CF/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-01-21 - 18-15 Real Madrid 2 - 1 Malaga/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-01-21 - 18-15 Real Madrid 2 - 1 Malaga/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-02-18 - 18-15 Real Madrid 2 - 0 Espanyol/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-02-18 - 18-15 Real Madrid 2 - 0 Espanyol/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-04-23 - 21-45 Real Madrid 2 - 3 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-04-23 - 21-45 Real Madrid 2 - 3 Barcelona/half2",
+        "num_frames": 72750
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-04-29 - 17-15 Real Madrid 2 - 1 Valencia/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-04-29 - 17-15 Real Madrid 2 - 1 Valencia/half2",
+        "num_frames": 73250
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-04-29 - 21-45 Espanyol 0 - 3 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-04-29 - 21-45 Espanyol 0 - 3 Barcelona/half2",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-05-14 - 21-00 Las Palmas 1 - 4 Barcelona/half1",
+        "num_frames": 67500
+    },
+    {
+        "video": "spain_laliga/2016-2017/2017-05-14 - 21-00 Las Palmas 1 - 4 Barcelona/half2",
+        "num_frames": 67500
+    }
+]
