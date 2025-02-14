@@ -6,9 +6,6 @@ services:
     env_file: .env
     volumes:
       - .:/app  # Mount current directory to /app
-    runtime: nvidia  # Enable NVIDIA runtime
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all  # Make all GPUs available
     deploy:
       resources:
         reservations:

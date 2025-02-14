@@ -11,6 +11,7 @@ RUN pip install -r requirements.txt
 
 COPY checkpoints checkpoints
 COPY soccernet soccernet
+COPY config config
 COPY data data
 COPY dataset dataset
 COPY model model
@@ -18,6 +19,7 @@ COPY util util
 COPY .env .env
 COPY evaluate_tdeed_challenge.py .
 COPY train_tdeed.py .
+COPY run_inference.py .
 
 # Set the default command - separate script and arguments
-CMD ["python", "evaluate_tdeed_challenge.py", "--model", "SoccerNet_small"] 
+CMD ["python", "run_inference.py", "--model", "SoccerNet_small"] 

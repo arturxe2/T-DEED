@@ -1,7 +1,7 @@
 {
-    "frame_dir": "/soccernet/frames448",
-    "save_dir": "/soccernet/save",
-    "store_dir": "/soccernet/store",
+    "frame_dir": "/app/soccernet/frames448",
+    "save_dir": "/app/soccernet/save",
+    "store_dir": "/app/soccernet/store",
     "store_mode": "store",
     "batch_size": 8,
     "clip_len": 100,

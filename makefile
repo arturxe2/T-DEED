@@ -1,10 +1,10 @@
 .PHONY: dockerbuild
 dockerbuild:
-	docker compose build
+	docker-compose build
 
 .PHONY: dockerrun
 dockerrun:
-	bash -c "sudo docker compose up"
+	bash -c "sudo docker-compose up"
 
 .PHONY: docker
 docker:
