@@ -3,6 +3,7 @@
 <a href="https://pytorch.org/get-started/locally/"><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
 [![arXiv](https://img.shields.io/badge/arXiv-2404.05392-red)](https://arxiv.org/abs/2404.05392)
 [![ProjectPage](https://img.shields.io/badge/Project%20Page-green)](https://arturxe2.github.io/projects/T-DEED/)
+[![ExtendedPaper](https://img.shields.io/badge/ExtendedPaper-green)](https://arturxe2.github.io/files/TDEED_Revisited.pdf)
 
 This repository contains the PyTorch implementation of the paper:
 
