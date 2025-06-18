@@ -11,6 +11,8 @@ This repository contains the PyTorch implementation of the paper:
 *Artur Xarles, Sergio Escalera, Thomas B. Moeslund, and Albert Clapés*<br>
 **10th International Workshop on Computer Vision in Sports (CVsports) at CVPR 2024**<br>
 
+An extension of the paper with additional results can be found in the provided button above (ExtendedPaper).
+
 
 ## Overview
 
