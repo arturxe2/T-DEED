@@ -62,6 +62,22 @@ Model checkpoints can be found at this [link](https://drive.google.com/drive/fol
 *There has been a slight improvement in the results of some datasets compared to those reported in the paper.\
 **Note: Some results may slightly vary from those reported in the paper, as the paper's results are the average of two executions with different seeds, while here we only include one of the model's checkpoints.
 
+## Perform inference
+
+You can perform inference on a single video using the `inference.py` script. Run it from the command line as follows:
+
+```
+python3 inference.py --model <model_name> --video_path <video_path> --frame_width <frame_width> --frame_height <frame_height> --inference_threshold <inference_threshold>
+```
+
+For example, to use a pre-trained SoccerNetBall model:
+
+```
+python3 inference.py --model SoccerNetBall_challenge1 --video_path /videos/inference_video.mp4 --frame_width 796 --frame_height 448 --inference_threshold 0.3
+```
+
+Ensure that the specified trained model is accessible. The frame width and height must match the resolution used during model training. The inference threshold can be adjusted according to your preference. 
+
 ## Contact
 
 If you have any questions related to the code, feel free to contact arturxe@gmail.com.
