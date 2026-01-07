@@ -67,6 +67,23 @@ def store_json_snb(pred_path, pred, stride = 1):
         with open(path + '/results_spotting.json', 'w') as fp:
             json.dump(gameDict, fp, indent=4)
 
+def store_json_inference(out_path, pred, stride = 1):
+    predDict = dict()
+    predDict['predictions'] = []
+    for event in pred['events']:
+        eventDict = dict()
+        frame = int(event['frame']) * stride
+        eventDict['frame'] = frame
+        eventDict['label'] = event['label']
+        eventDict['confidence'] = event['score']
+        predDict['predictions'].append(eventDict)
+
+    if not os.path.exists(out_path):
+        os.makedirs(out_path)
+    with open(out_path + '/results_inference.json', 'w') as fp:
+        json.dump(predDict, fp, indent=4)
+
+
 def load_text(fpath):
     lines = []
     with open(fpath, 'r') as fp:

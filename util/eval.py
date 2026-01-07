@@ -18,7 +18,7 @@ import glob
 
 #Local imports
 from util.score import compute_mAPs
-from util.io import store_json, store_json_sn, store_json_snb
+from util.io import store_json, store_json_sn, store_json_snb, store_json_inference
 
 #Constants
 TOLERANCES = [1, 2, 4]
@@ -191,6 +191,39 @@ def process_frame_predictions_challenge(
             'fps': fps_dict[video]})
 
     return pred_events, pred_events_high_recall, pred_scores
+
+def process_frame_predictions_inference(
+        dataset, classes, scores, support, high_recall_score_threshold=0.05
+):
+    classes_inv = {v: k for k, v in classes.items()}
+
+    if np.min(support) == 0:
+        support[support == 0] = 1
+    assert np.min(support) > 0, support.tolist()
+    scores /= support[:, None]
+    pred = np.argmax(scores, axis=1)
+    pred_scores = scores.tolist()
+
+    events = []
+    events_high_recall = []
+    for i in range(pred.shape[0]):
+
+        if pred[i] != 0:
+            events.append({
+                'label': classes_inv[pred[i]],
+                'frame': i,
+                'score': scores[i, pred[i]].item()
+            })
+
+        for j in classes_inv:
+            if scores[i, j] >= high_recall_score_threshold:
+                events_high_recall.append({
+                    'label': classes_inv[j],
+                    'frame': i,
+                    'score': scores[i, j].item()
+                })
+
+    return events, events_high_recall, pred_scores
 
 def non_maximum_supression(pred, window, threshold = 0.0):
     preds = copy.deepcopy(pred)
@@ -673,3 +706,52 @@ def predictions2vector(predictions, num_classes=17, version=2, framerate=2, EVEN
             prediction_half1[frame][label] = value
 
     return prediction_half1
+
+def inference(model, inference_loader, classes, threshold=0.5):
+
+    stride = inference_loader.dataset._stride
+    video_len = inference_loader.dataset._video_len
+    dataset = inference_loader.dataset._dataset
+    
+    windows = WINDOWS
+
+    if dataset == 'soccernet':
+        windows = WINDOWS_SN
+
+    if dataset == 'soccernetball':
+        windows = WINDOWS_SNB
+
+    if dataset == 'tennis':
+        windows = WINDOWS_T
+
+    if dataset == 'finegym':
+        windows = WINDOWS_FG
+
+
+    predictions = np.zeros((video_len // stride, len(classes)+1), np.float32)
+    support = np.zeros((video_len // stride), np.int32)
+
+    for frames, starts in tqdm(inference_loader):
+        _, batch_pred_scores = model.predict(frames)
+
+        for i in range(frames.shape[0]):
+            pred_scores = batch_pred_scores[i]
+            start = starts[i].item()
+            if start < 0:
+                pred_scores = pred_scores[-start:, :]
+                start = 0
+            end = start + pred_scores.shape[0]
+            if end >= predictions.shape[0]:
+                end = predictions.shape[0]
+                pred_scores = pred_scores[:end - start, :]
+
+            predictions[start:end, :] += pred_scores
+            support[start:end] += (pred_scores.sum(axis=1) != 0) * 1
+
+    pred_events, pred_events_high_recall, pred_scores = \
+            process_frame_predictions_inference(dataset, classes, predictions, support, high_recall_score_threshold=threshold)
+    
+    pred_events_high_recall_store = soft_non_maximum_supression([{'events': pred_events_high_recall}], window = windows[1], threshold=threshold)
+
+    print('Storing predictions with SNMS')
+    store_json_inference('inference_output', pred_events_high_recall_store[0], stride = stride)

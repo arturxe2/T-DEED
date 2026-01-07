@@ -11,11 +11,13 @@ import random
 import numpy as np
 import copy
 import torch
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, IterableDataset
 import torchvision
 from tqdm import tqdm
 import pickle
 import math
+import cv2
+from collections import deque
 
 #Local imports
 
@@ -661,3 +663,66 @@ class ActionSpotDatasetJoint(Dataset):
 
     def __len__(self):
         return self._dataset1.__len__() + self._dataset2.__len__()
+
+
+class ActionSpotInferenceDataset(IterableDataset):
+
+    def __init__(
+            self,
+            video_path,
+            clip_len,
+            overlap_len=0,
+            stride=1,
+            pad_len=DEFAULT_PAD_LEN,
+            dataset = 'finediving',
+            size = (398, 224)
+    ):
+        self.video_path = video_path
+        self._clip_len = clip_len
+        self._overlap_len = self._clip_len - overlap_len
+        self._stride = stride
+        self._pad_len = pad_len
+        self._dataset = dataset
+        self._size = size
+        stream = cv2.VideoCapture(self.video_path)
+        self._video_len = int(stream.get(cv2.CAP_PROP_FRAME_COUNT))
+        stream.release()
+
+    def __iter__(self):
+        stream = cv2.VideoCapture(self.video_path)
+
+        buffer = deque()
+
+        i = - self._pad_len * self._stride
+        while True:
+
+            if i < 0:
+                if i % self._stride == 0:
+                    frame = np.zeros((self._size[1], self._size[0], 3), np.uint8)
+                    frame = torch.from_numpy(frame).permute(2, 0, 1)
+                    buffer.append(frame)
+                i += 1
+                continue
+
+            ret, frame = stream.read()
+            if not ret:
+                break
+            
+            if i % self._stride != 0:
+                i += 1
+                continue
+            
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            frame = cv2.resize(frame, self._size)
+            frame = torch.from_numpy(frame).permute(2, 0, 1)
+
+            buffer.append(frame)
+
+            i += 1
+
+            if len(buffer) == self._clip_len:
+                yield torch.stack(list(buffer)), (i + self._stride - 1) // self._stride - self._clip_len
+                for _ in range(self._overlap_len):
+                    buffer.popleft()
+
+        stream.release()
